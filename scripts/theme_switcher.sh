@@ -67,10 +67,11 @@ for src_dir in "$THEME_DIR"/*/; do
 
   if [[ "$folder_name" == "hypr" ]]; then
     mkdir -p "$target_dir"
-    rsync -av --exclude='hyprland.conf' --exclude='scripts/' "$src_dir/" "$target_dir/"
-    [[ ! -f "$target_dir/hyprland.conf" ]] && cp -v "$src_dir/hyprland.conf" "$target_dir/"
-    [[ ! -d "$target_dir/scripts" ]] && cp -r "$src_dir/scripts" "$target_dir/"
-  else
+    # rsync -av --exclude='hyprland.conf' --exclude='scripts/' "$src_dir/" "$target_dir/"
+    # [[ ! -f "$target_dir/hyprland.conf" ]] && cp -v "$src_dir/hyprland.conf" "$target_dir/"
+  #   [[ ! -d "$target_dir/scripts" ]] && cp -r "$src_dir/scripts" "$target_dir/"
+  #   [[ ! -d "$target_dir/config" ]] && cp -r "$src_dir/scripts" "$target_dir/"
+  # else
     rm -rf "$target_dir"
     cp -r "$src_dir" "$HOME/.config/"
   fi
@@ -104,7 +105,9 @@ mkdir -p ~/.cache
 ln -sf "$WALLPAPER" ~/.cache/current_wallpaper
 
 # 7. RESTART & NOTIFY
-pkill -USR2 waybar 2>/dev/null || true
+# pkill -USR2 waybar 2>/dev/null || true
+kill waybar && 
+waybar  & 
 hyprctl reload
 echo "$NEXT" > "$STATE_FILE"
 notify-send "Theme switched to: $THEME" "Wallpaper: $(basename "$WALLPAPER")"
