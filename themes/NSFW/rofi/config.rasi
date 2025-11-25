@@ -1,0 +1,7 @@
+configuration {
+  kb-remove-char-forward: "";
+  kb-custom-1: "Ctrl+d";
+}
+
+
+@theme "~/.config/rofi/themes/drun-translucent.rasi"

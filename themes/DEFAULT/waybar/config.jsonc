@@ -1,0 +1,289 @@
+[
+  {
+    "name": "topbar",
+    "layer": "top",
+    "position": "top",
+    "spacing": 0,
+    "mod": "dock",
+    "margin-left": 10,
+    "margin-right": 10,
+    "margin-top": 0,
+    // "margin-bottom": -8,
+    "margin-bottom": 0,
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "reload_style_on_change": true,
+
+    "modules-left": [
+      "hyprland/workspaces",
+      "custom/apps",
+      "cpu",
+      "temperature",
+      "memory",
+      "wlr/taskbar"
+    ],
+    "modules-center": [
+      "clock"
+      // , "custom/window-controls"
+      // , "custom/close-window"
+      // , "custom/close_focused"
+    ],
+    "modules-right": [
+      "network#speed",
+      "group/brightness",
+      "group/audio",
+      "bluetooth",
+      "custom/warp",
+      "network#icon",
+      "battery",
+      "custom/notification",
+      "custom/wlogout"
+    ],
+    "hyprland/workspaces": {
+      "format": "{name}:{icon}",
+      "format-icons": {
+        "active": "",
+        "default": ""
+      }
+    },
+    "bluetooth": {
+      "format": "󰂲",
+      "format-on": "{icon}",
+      "format-off": "{icon}",
+      "format-connected": "{icon}",
+      "format-icons": {
+        "on": "󰂯",
+        "off": "󰂲",
+        "connected": "󰂱"
+      },
+      "on-click": "blueman-manager",
+      "tooltip-format-connected": "{device_enumerate}"
+    },
+    "clock": {
+      "timezone": "Asia/Kolkata",
+      "tooltip": false,
+      // "format": "{:%H:%M:%S - %A, %d}",
+      "format": "{:%H:%M - %A, %d}",
+      "interval": 1
+    },
+
+    "custom/warp": {
+      "exec": "~/.config/scripts/warp_status.sh",
+      "on-click": "~/.config/scripts/warp_connect.sh", 
+      "on-click-right": "~/.config/scripts/warp_disconnect.sh", 
+      "interval": 3,
+      "tooltip": true
+    }, 
+
+    "network#icon": {
+      // "interface": "wlo1",
+      "format-wifi": "{icon} {signalStrength}%",
+      "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+      "format-ethernet": "󰈀 {ifname}",
+      "format-linked": "󰌷 {ifname} (No IP)",
+      "format-disconnected": "󰤭 Disconnected",
+      "tooltip-format": "{essid} | {ipaddr}",
+      "tooltip-format-ethernet": "{ifname} connected",
+      "on-click": "kitty -e nmtui"
+    },
+
+    "network#speed": {
+      // "interface": "wlo1",
+      "format": "{bandwidthTotalBytes}",
+      "tooltip": true,
+      "interval":2,
+      "tooltip-format": "󰕒 {bandwidthUpBytes} | 󰇚 {bandwidthDownBytes}"
+    },
+
+    // "network": {
+    //   "format-wifi": "󰤢  {bandwidthUpBytes} {bandwidthDownBytes}  {signalStrength}%",
+    //   "format-ethernet": "󰈀 {ifname}",
+    //   "format-disconnected": "󰤠 Disconnected",
+    //   "interval": 5,
+    //   "tooltip-format": "SSID: {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}",
+    //   "on-click": "nm-connection-editor"
+    // },
+    "cpu": {
+      "interval": 1,
+      "format": " {icon0}{icon1}{icon2}{icon3} {usage:>2}%",
+      "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+      "on-click": "kitty -e btop"
+    },
+    "memory": {
+      "interval": 30,
+      "format": "   {used:0.1f}G/{total:0.1f}G",
+      "tooltip-format": "Memory",
+      "on-click": "kitty -e btop"
+    },
+
+    "battery": {
+      "interval": 2,
+      "states": {
+        "warning": 30,
+        "critical": 15
+      },
+      "format": "{icon} {capacity}%",
+      "format-charging": " {capacity}%",
+      "format-plugged": " {capacity}%",
+      "format-icons": [" ", " ", "  ", " ", "  "]
+    },
+
+    "group/brightness": {
+      "orientation": "inherit",
+      "drawer": {
+        "transition-duration": 500,
+        "children-class": "backlight.slider",
+      },
+      "modules": [
+        "backlight",
+        "backlight/slider"
+      ]
+    },
+
+    "backlight": {
+      "format": "{icon} {percent}%",
+      "format-icons": [" ", "󰃜 ", "󰃛 ", "󰃞 ", "󰃝 ", "󰃟 ", "󰃠 "],
+      "tooltip": false,
+      "on-click": "brightnessctl set 5%+",
+      "on-click-right": "brightnessctl set 5%-"
+    },
+
+    "backlight/slider": {
+      "min": 1,
+      "max": 100,
+      "orientation": "horizontal",
+      "device": "intel_backlight",
+      "on-scroll-up": "brightnessctl set 1%+",
+      "on-scroll-down": "brightnessctl set 1%-",
+      "on-click": "brightnessctl set {percent}%"
+    },
+
+    "group/audio": {
+      "orientation": "inherit",
+      "drawer": {
+        "transition-duration": 500,
+        "children-class": "pulseaudio-slider",
+      },
+      "modules": [
+        "pulseaudio",
+        "pulseaudio/slider"
+      ]
+    },
+
+    "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-muted": "",
+      "format-icons": {
+        "default": [" ", " ", "  "]
+      },
+      "tooltip": true,
+      "tooltip-format": "{desc} – {volume}%",
+      "on-click": "pavucontrol",
+      "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+      "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+      "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    },
+
+    "pulseaudio/slider": {
+      "min": 0,
+      "max": 100,
+      "orientation": "horizontal",
+      "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +1%",
+      "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -1%",
+      "on-click": "pactl set-sink-volume @DEFAULT_SINK@ {percent}%"
+    },
+
+    "custom/wlogout": {
+      "format": "⎋",
+      "tooltip": false,
+      "on-click": "wlogout"
+    },
+    "custom/apps": {
+      "format": "  Apps",
+      "tooltip": false,
+      "on-click": "bash ~/.config/rofi/launcher.sh"
+    },
+
+    "custom/notification": {
+      "tooltip": true,
+      "format": "<span size='12pt'>{icon}</span>",
+      "format-icons": {
+        "notification": "󱅫",
+        "none": "󰂜",
+        "dnd-notification": "󰂠",
+        "dnd-none": "󰪓",
+        "inhibited-notification": "󰂛",
+        "inhibited-none": "󰪑",
+        "dnd-inhibited-notification": "󰂛",
+        "dnd-inhibited-none": "󰪑"
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
+    },
+
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 20,
+      "all-outputs": false,
+      "tooltip-format": "{title}",
+      "on-click": "activate",
+      "on-click-right": "close",
+      "ignore-list": ["waybar"],
+      "app-icon-size": 20
+    }, 
+
+    "temperature": {
+      "critical-threshold": 90,
+      "interval": 4,
+      "format": "{icon} {temperatureC}°",
+      "format-icons": ["", "", "", "", ""],
+      "tooltip": false
+    }
+
+
+    // "hyprland/window": {
+    //   "format": "{}",
+    //   "max-length": 60,
+    //   "separate-outputs": true,
+    //   "rewrite": {
+    //     ".*Firefox$": "󰈹 Firefox",
+    //     ".*Code$": "󰨞 VS Code",
+    //     ".*Kitty$": " Terminal",
+    //     ".*vim$": " Nvim",
+    //     ".*Thunar$": " File Manager",
+    //     ".*Gwenview$": " Image Viewer"
+    //   }
+    // } 
+    // "custom/close_focused": {
+    //   "format": "{}",
+    //   "exec": "~/.config/waybar/scripts/focused_icon.sh",
+    //   "on-click": "hyprctl dispatch killactive",
+    //   "return-type": "json",
+    //   "interval": 1,
+    //   "tooltip": "Click to close focused window"
+    // }
+    // "custom/close-window": {
+    //   "format": "{}",
+    //   "exec": "~/.config/waybar/scripts/close-window.sh",
+    //   "return-type": "json",
+    //   "interval": 1,
+    //   "on-click": "hyprctl dispatch closewindow address:$(hyprctl activewindow -j | jq -r '.address')",
+    //   "tooltip": false
+    // }
+    // "custom/window-controls": {
+    //   "format": "{}",
+    //   "return-type": "json",
+    //   "exec": "$HOME/.config/waybar/scripts/window-controls.sh",
+    //   "interval": 1,
+    //   "on-click": "$HOME/.config/waybar/scripts/window-controls.sh click minimize",
+    //   "on-click-right": "$HOME/.config/waybar/scripts/window-controls.sh click close",
+    //   "on-click-middle": "$HOME/.config/waybar/scripts/window-controls.sh click float",
+    //   "escape": true
+    // }
+  }
+]

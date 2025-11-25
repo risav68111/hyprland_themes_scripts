@@ -1,0 +1,249 @@
+/* vim:fileencoding=utf-8:foldmethod=marker */
+
+/* Define colors */
+@define-color background1 rgba(32, 32, 48, 1);
+@define-color background2 rgba(21, 21, 32, 1);
+@define-color sepepator #313244;
+@define-color warning #f38ba8;
+@define-color caution #45475a;
+@define-color performance #f5c2e7;
+@define-color audio #cba6f7;
+@define-color misc #94e2d5;
+@define-color date #a6e3a1;
+@define-color work #b4befe;
+@define-color window #b4befe;
+@define-color resize #eba0ac;
+@define-color process #89b4fa;
+@define-color text #000000;
+
+/* Reset */
+* {
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+/* Main bar */
+#waybar.main {
+  background: @background2;
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-size: 8pt;
+  font-weight: 600;
+  color: @text;
+  border-radius: 6pt;
+}
+
+/* Module defaults */
+#waybar.main #custom-nvidia,
+#waybar.main #custom-weather,
+#waybar.main #custom-battery,
+#waybar.main #keyboard-state,
+#waybar.main #network,
+#waybar.main #battery,
+#waybar.main #backlight,
+#waybar.main #clock,
+#waybar.main #cpu,
+#waybar.main #language,
+#waybar.main #memory.swap,
+#waybar.main #memory.ram,
+#waybar.main #submap,
+#waybar.main #pulseaudio,
+#waybar.main #temperature,
+#waybar.main #tray,
+#waybar.main #window,
+#waybar.main #disk {
+  padding: 0 5pt;
+  background: @background1;
+}
+
+#waybar.main #custom-weather { padding-right: 3pt; }
+#waybar.main #custom-nvidia   { margin: 0; }
+
+/* Module colors */
+#waybar.main #custom-nvidia,
+#waybar.main #cpu,
+#waybar.main #temperature,
+#waybar.main #memory.ram,
+#waybar.main #memory.swap,
+#waybar.main #disk,
+#waybar.main #network {
+  color: @performance;
+}
+
+#waybar.main #pulseaudio {
+  color: @audio;
+  background: @background2;
+}
+
+#waybar.main #custom-battery,
+#waybar.main #language,
+#waybar.main #backlight,
+#waybar.main #battery {
+  color: @misc;
+}
+
+#waybar.main #custom-weather,
+#waybar.main #clock {
+  color: @date;
+  background: @background2;
+}
+
+#waybar.main #clock {
+  border-radius: 0 6pt 6pt 0;
+}
+
+#waybar.main #window {
+  color: @window;
+  font-style: italic;
+  background: transparent;
+}
+
+/* Network info */
+#waybar.main #network.info { padding: 0 10px; color: @caution; }
+#waybar.main #network.info.wifi.normal,
+#waybar.main #network.info.ethernet { color: @performance; padding-right: 15px; }
+#waybar.main #network.info.wifi { color: @warning; padding-right: 15px; }
+
+/* Submap (static) */
+#waybar.main #submap.RESIZE { color: @resize; }
+#waybar.main #submap.MOVE  { color: @date; }
+
+/* Critical states (static red) */
+#waybar.main #custom-nvidia.critical,
+#waybar.main #memory.swap.critical,
+#waybar.main #memory.ram.critical,
+#waybar.main #cpu.critical,
+#waybar.main #temperature.critical {
+  color: @warning;
+}
+
+/* Battery states (static) */
+#waybar.main #custom-battery.warning,
+#waybar.main #custom-battery.critical { color: @warning; }
+#waybar.main #custom-battery.charging { color: @misc; }
+#waybar.main #pulseaudio.muted { color: @sepepator; }
+
+/* Workspaces */
+#waybar.main #workspaces {
+  padding: 0 4px 0 20px;
+  background-image: linear-gradient(-243.435deg,
+    @background2 17px,
+    @sepepator 17px,
+    @sepepator 21px,
+    transparent 21px,
+    transparent calc(100% - 22px),
+    @sepepator calc(100% - 22px),
+    @sepepator calc(100% - 18px),
+    transparent calc(100% - 18px)
+  );
+}
+
+#waybar.main #workspaces button {
+  color: #45475a;
+  background: transparent;
+  border: 1.5px solid transparent;
+  padding: 6px 16px;
+  margin-left: -17px;
+  font-style: italic;
+  background-image: linear-gradient(-63.435deg,
+    transparent 25%,
+    @background2 25%,
+    @background2 75%,
+    transparent 75%
+  );
+}
+
+#waybar.main #workspaces button.visible {
+  color: @text;
+  background-image: linear-gradient(-63.435deg,
+    transparent 25%,
+    @caution 25%,
+    @caution 75%,
+    transparent 75%
+  );
+}
+
+#waybar.main #workspaces button.active {
+  color: @window;
+  background-image: linear-gradient(-63.435deg,
+    transparent 24%,
+    @sepepator 24%,
+    @sepepator 28%,
+    @background1 28%,
+    @background1 73%,
+    @sepepator 73%,
+    @sepepator 76%,
+    transparent 76%
+  );
+}
+
+#waybar.main #workspaces button:hover { color: @window; }
+#waybar.main #workspaces button.special.active { color: @sepepator; }
+
+/* Spacers */
+#waybar.main #custom-spacer1 { background-image: linear-gradient(63.435deg, transparent 47.5%, @sepepator 47.6%, @sepepator 52.4%, @background1 52.5%); }
+#waybar.main #custom-spacer2 { background-image: linear-gradient(63.435deg, @background1 47.5%, @sepepator 47.6%, @sepepator 52.4%, @background2 52.5%); }
+#waybar.main #custom-spacer3 { background-image: linear-gradient(63.435deg, @background2 47.5%, @sepepator 47.6%, @sepepator 52.4%, @background1 52.5%); }
+#waybar.main #custom-spacer4 { background-image: linear-gradient(63.435deg, @background1 47.5%, @sepepator 47.6%, @sepepator 52.4%, @background2 52.5%); }
+#waybar.main #custom-spacer5, #custom-spacer6 { background-image: linear-gradient(-63.435deg, transparent 47.5%, @sepepator 47.6%, @sepepator 52.4%, transparent 52.5%); }
+
+#waybar.main #custom-spacer1,
+#waybar.main #custom-spacer2,
+#waybar.main #custom-spacer3,
+#waybar.main #custom-spacer4,
+#waybar.main #custom-spacer5,
+#waybar.main #custom-spacer6 {
+  font-size: 16pt;
+  color: transparent;
+  padding: 0 4px;
+}
+
+/* Tray icon */
+#waybar.main #custom-trayicon {
+  font-size: 11pt;
+  color: transparent;
+  padding: 0 2pt 0 0;
+  background: transparent;
+  background-image: url("/home/jan-aarela/.config/hypr/themes/Mocha-Power/pacman.png");
+  background-size: 16px;
+  background-position: 2px 0;
+  background-repeat: no-repeat;
+}
+
+/* Tooltip */
+tooltip,
+#waybar.main #tray menu {
+  background: @background1;
+  border: 3px solid @caution;
+  border-radius: 8px;
+  font-family: "JetBrains Mono Nerd Font";
+  font-weight: 500;
+}
+
+/* Indicator bar (battery bar) */
+#waybar.indicator {
+  font-size: 10px;
+  color: transparent;
+  background: transparent;
+}
+
+#waybar.indicator #custom-batteryindicator {
+  border: 2.5px solid @sepepator;
+  background: transparent;
+  border-radius: 7px;
+  padding-left: 2502px;
+  box-shadow:
+    inset 0 4px 4px -5px rgba(0,0,0,0.5),
+    inset 0 -4px 4px -5px rgba(0,0,0,0.5);
+}
+
+/* Static battery states */
+#waybar.indicator #custom-batteryindicator.critical   { border-color: @warning; }
+#waybar.indicator #custom-batteryindicator.warning    { border-color: @warning; }
+#waybar.indicator #custom-batteryindicator.discharging{ border-color: @warning; }
+#waybar.indicator #custom-batteryindicator.charging   { border-color: @misc; }
+#waybar.indicator #custom-batteryindicator.full       { border-color: @misc; }

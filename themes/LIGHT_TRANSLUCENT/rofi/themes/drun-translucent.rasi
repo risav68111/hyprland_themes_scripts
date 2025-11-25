@@ -1,0 +1,85 @@
+/* --------------------------------------------------------------
+   Rofi Drun Theme: Translucent Black + Icons + Resizable
+   -------------------------------------------------------------- */
+configuration {
+  show-icons: true;
+  icon-theme: "Papirus";
+  // display-drun: "";
+  drun-display-format: "{name}";
+  disable-history: false;
+}
+
+* {
+    background-color:   #1e1e1eCC;   /* Black with 80% opacity (CC = ~80%) */
+    text-color:         #ffffff;
+    border-color:       #444444;
+    selected-bg:        #3584e4CC;   /* Accent (blue) with transparency */
+    selected-fg:        #ffffff;
+    urgent-bg:          #e53935;
+    font:               "JetBrainsMono Nerd Font 12";
+    icon-theme:         "Papirus";
+}
+
+/* Main window */
+window {
+    transparency:       "real";
+    background-color:   @background-color;
+    border:             2px;
+    border-color:       @border-color;
+    border-radius:       12px;
+    padding:            10px;
+    width:              520px;       /* ← Change width here */
+    height:             420px;       /* ← Change height here */
+    location:           center;
+}
+
+/* Input bar */
+inputbar {
+    spacing:            8px;
+    children:           [ prompt, entry ];
+}
+
+prompt {
+    text-color:         #81c995;
+}
+
+entry {
+    placeholder:        "Search apps...";
+    placeholder-color:  #888888;
+}
+
+/* List container */
+listview {
+    lines:              8;           /* Number of visible items */
+    columns:            1;
+    spacing:            6px;
+    fixed-height:       false;
+}
+
+/* Each row */
+element {
+    padding:            10px 12px;
+    spacing:            12px;
+    border-radius:      8px;
+}
+
+element selected {
+    background-color:   @selected-bg;
+    text-color:         @selected-fg;
+}
+
+/* Icon size */
+element-icon {
+    size:               48px;        /* ← Change icon size here (32, 48, 64, etc.) */
+    margin-right:       12px;
+}
+
+element-text {
+    vertical-align:     0.5;
+}
+
+/* Scrollbar */
+scrollbar {
+    handle-color:       #555555;
+    handle-width:       6px;
+}

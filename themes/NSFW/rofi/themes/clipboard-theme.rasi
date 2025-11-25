@@ -1,0 +1,90 @@
+// Rofi Drun Theme: Translucent Black + Icons + Resizable
+configuration {
+  show-icons: false;
+  icon-theme: "Papirus";
+  // display-drun: "";
+  drun-display-format: "{name}";
+  disable-history: true;
+}
+
+* {
+    background-color:   #1e1e1eCC;   /* Black with 80% opacity (CC = ~80%) */
+    text-color:         #ffffff;
+    border-color:       #444444;
+    selected-bg:        #3584e4CC;   /* Accent (blue) with transparency */
+    selected-fg:        #ffffff;
+    urgent-bg:          #e53935;
+    font:               "JetBrainsMono Nerd Font 12";
+    icon-theme:         "Papirus";
+}
+
+/* Main window */
+window {
+    transparency:       "real";
+    background-color:   @background-color;
+    border:             3px;
+    border-color:       @border-color;
+    border-radius:       12px;
+    padding:            10px;
+    width:              820px;       /* ← Change width here */
+    height:             420px;       /* ← Change height here */
+    location:           center;
+}
+
+/* Input bar */
+inputbar {
+    spacing:            9px;
+    children:           [ prompt, entry ];
+}
+
+prompt {
+    text-color:         #81c995;
+}
+
+entry {
+    placeholder:        "clipboard...";
+    placeholder-color:  #888888;
+}
+
+/* List container */
+listview {
+    lines:              18;           /* Number of visible items */
+    columns:            1;
+    spacing:            16px;
+    fixed-height:       false;
+}
+
+/* Each row */
+element {
+    padding:            10px 12px;
+    spacing:            12px;
+    border-radius:      8px;
+}
+
+element selected {
+    background-color:   @selected-bg;
+    text-color:         @selected-fg;
+}
+
+/* Icon size */
+element-icon {
+    size:               48px;        /* ← Change icon size here (32, 48, 64, etc.) */
+    margin-right:       12px;
+}
+
+element-text {
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+    wrap: true;          /* enables wrapping */
+    word-wrap: true;     /* important for rofi ≥ 1.7 */
+    max-lines: 2;        /* force 2 lines max */
+    ellipsis: "...";     /* show ... after 2 lines */
+}
+
+
+/* Scrollbar */
+scrollbar {
+    handle-color:       #555555;
+    handle-width:       8px;
+}
+

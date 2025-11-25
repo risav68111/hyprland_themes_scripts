@@ -1,0 +1,223 @@
+[
+  {
+    "name": "topbar",
+    "layer": "top",
+    "position": "top",
+    "margin-bottom": -2,
+    "spacing": 0,
+    "modules-left": [
+      "custom/apps",
+      "cpu",
+      "memory",
+      "wlr/taskbar"
+    ],
+    "modules-center": [
+      "hyprland/workspaces",
+      "custom/wlogout"
+      // , "custom/window-controls"
+      // , "custom/close-window"
+      // , "custom/close_focused"
+    ],
+    "modules-right": [
+      "group/brightness",
+      "group/audio",
+      "bluetooth",
+      "network#icon",
+      "network#speed",
+      "battery",
+      "clock",
+      "custom/notification",
+    ],
+    "hyprland/workspaces": {
+      "format": "{name}:{icon}",
+      "format-icons": {
+        "active": "",
+        "default": ""
+      }
+    },
+    "bluetooth": {
+      "format": "󰂲",
+      "format-on": "{icon}",
+      "format-off": "{icon}",
+      "format-connected": "{icon}",
+      "format-icons": {
+        "on": "󰂯",
+        "off": "󰂲",
+        "connected": "󰂱"
+      },
+      "on-click": "blueman-manager",
+      "tooltip-format-connected": "{device_enumerate}"
+    },
+    "clock": {
+      "timezone": "Asia/Kolkata",
+      "tooltip": false,
+      // "format": "{:%H:%M:%S - %A, %d}",
+      "format": "{:%H:%M-%A,%d}",
+      "interval": 60
+    },
+
+      "network#icon": {
+      // "interface": "wlan0",
+      "format-wifi": "{icon}  {signalStrength}%",
+      "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+      "format-ethernet": "󰈀 {ifname}",
+      "format-linked": "󰌷 {ifname} (No IP)",
+      "format-disconnected": "󰤭 Disconnected",
+      "tooltip-format": "{essid} | {ipaddr}",
+      "tooltip-format-ethernet": "{ifname} connected",
+      "on-click": "kitty -e nmtui"
+    },
+
+    "network#speed": {
+      // "interface": "wlan0",
+      "format": "{bandwidthTotalBytes}",
+      "tooltip": true,
+      "interval":3,
+      "tooltip-format": " {bandwidthUpBytes} |  {bandwidthDownBytes}"
+    },
+
+    // "network": {
+    //   "format-wifi": "󰤢  {bandwidthUpBytes} {bandwidthDownBytes}  {signalStrength}%",
+    //   "format-ethernet": "󰈀 {ifname}",
+    //   "format-disconnected": "󰤠 Disconnected",
+    //   "interval": 5,
+    //   "tooltip-format": "SSID: {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}",
+    //   "on-click": "nm-connection-editor"
+    // },
+    "cpu": {
+      "interval": 1,
+      "format": "{icon0}{icon1}{icon2}{icon3}{usage:>2}%",
+      "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+      "on-click": "kitty -e btop"
+    },
+    "memory": {
+      "interval": 30,
+      "format": "  {used:0.1f}G/{total:0.1f}G",
+      "tooltip-format": "Memory",
+      "on-click": "kitty -e btop"
+    },
+
+    "battery": {
+      "interval": 22,
+      "states": {
+        "warning": 30,
+        "critical": 15
+      },
+      "format": "{icon} {capacity}%",
+      "format-charging": " {capacity}%",
+      "format-plugged": " {capacity}%",
+      "format-icons": [" ", " ", "  ", " ", "  "]
+    },
+
+    "group/brightness": {
+      "orientation": "inherit",
+      "drawer": {
+        "transition-duration": 500,
+        "children-class": "brightness-slider",
+        "transition-left-to-right": true
+      },
+      "modules": [
+        "backlight",
+        "backlight/slider"
+      ]
+    },
+
+    "backlight": {
+      "format": "{icon}{percent}%",
+      "format-icons": ["", "󰃜", "󰃛", "󰃞", "󰃝", "󰃟", "󰃠"],
+      "tooltip": false,
+      "on-click": "brightnessctl set 5%+",
+      "on-click-right": "brightnessctl set 5%-"
+    },
+
+    "backlight/slider": {
+      "min": 1,
+      "max": 100,
+      "orientation": "horizontal",
+      "device": "intel_backlight",
+      "on-scroll-up": "brightnessctl set 5%+",
+      "on-scroll-down": "brightnessctl set 5%-",
+      "on-click": "brightnessctl set {percent}%"
+    },
+
+    "group/audio": {
+      "orientation": "inherit",
+      "drawer": {
+        "transition-duration": 500,
+        "children-class": "pulseaudio-slider",
+        "transition-left-to-right": true
+      },
+      "modules": [
+        "pulseaudio",
+        "pulseaudio/slider"
+      ]
+    },
+
+    "pulseaudio": {
+      "format": "{icon}{volume}%",
+      "format-muted": "",
+      "format-icons": {
+        "default": [" ", " ", "  "]
+      },
+      "tooltip": true,
+      "tooltip-format": "{desc} – {volume}%",
+      "on-click": "pavucontrol",
+      "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+      "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+      "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    },
+
+    "pulseaudio/slider": {
+      "min": 0,
+      "max": 100,
+      "orientation": "horizontal",
+      "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +1%",
+      "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -1%",
+      "on-click": "pactl set-sink-volume @DEFAULT_SINK@ {percent}%"
+    },
+
+    "custom/wlogout": {
+      "format": "⎋",
+      "tooltip": false,
+      "on-click": "wlogout"
+    },
+    "custom/apps": {
+      "format": "",
+      "tooltip": false,
+      "on-click": "bash ~/.config/rofi/launcher.sh"
+    },
+    "custom/notification": {
+      "tooltip": true,
+      "format": "<span size='12pt'>{icon}</span>",
+      "format-icons": {
+        "notification": "󱅫",
+        "none": "󰂜",
+        "dnd-notification": "󰂠",
+        "dnd-none": "󰪓",
+        "inhibited-notification": "󰂛",
+        "inhibited-none": "󰪑",
+        "dnd-inhibited-notification": "󰂛",
+        "dnd-inhibited-none": "󰪑"
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
+    },
+
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 20,
+      "all-outputs": false,
+      "tooltip-format": "{title}",
+      "on-click": "activate",
+      "on-click-right": "close",
+      "ignore-list": ["waybar"],
+      "app-icon-size": 20
+    }
+
+  }
+]
+
