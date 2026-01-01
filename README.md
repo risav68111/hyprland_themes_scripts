@@ -8,28 +8,23 @@ Includes Bash scripts, CSS tweaks, and various utilities.
 ### Clone directly into your config directory:
 
 ```
-git clone https://github.com/risav68111/hyprland_themes_scripts.git ~/.config
+git clone https://github.com/risav68111/hyprland_themes_scripts.git ~/dotfiles
 ```
+
+### Required Packages
+```
+sudo pacman -S rofi hyprpaper swaync hyprlock hypridle wlogout swww hyprshot 
+```
+,etc.
 
 ### Make Scripts Executable
 ```
 chmod -R +x ~/.config/scripts/
 ```
-### Required Packages
+--
+run below command once.
 ```
-sudo pacman -S rofi hyprpaper swaync hyprlock hypridle wlogout
-```
-### Apply Theme once
-```
-bash ~/.config/scripts/theme_switcher.sh
-```
-#### Select your preferred theme.
-then you can press 
-```
-$SUPER T
-```
-to select theme and for toggle walllpaper by 
-```
-#SUPER W
-```
-
+chmod +x ~/dotfiles/Default/.config/scripts/theme_selector.sh
+bash ~/dotfiles/Default/.config/scripts/theme_selector.sh
+``` 
+then select theme.
