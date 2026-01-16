@@ -15,21 +15,7 @@ git clone https://github.com/risav68111/hyprland_themes_scripts.git ~/dotfiles
 ```
 sudo pacman -S rofi hyprpaper swaync hyprlock hypridle wlogout swww hyprshot 
 ```
-,etc.
 
-### Make Scripts Executable
-```
-chmod -R +x ~/.config/scripts/
-```
----
-run below command once.
-```
-chmod +x ~/dotfiles/Default/.config/scripts/theme_selector.sh
-bash ~/dotfiles/Default/.config/scripts/theme_selector.sh
-``` 
-then select theme.
-
----
 ## For Wallpapers
 keep in '`~/.config/wallpapers`' 
   
